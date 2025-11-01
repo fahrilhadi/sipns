@@ -1,26 +1,26 @@
-@extends('admin.master')
+@extends('master')
 
-@push('admin-addon-style')
+@push('addon-style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @endpush
 
-@section('admin-title')
-    Ubah Password | Sistem Supervisi Akademik
+@section('title')
+    Ubah Password | Sistem Informasi Kepegawaian
 @endsection
 
-@section('admin-content')
+@section('content')
     <div class="main-content">
         <section class="section">
           <div class="section-header">
             <h1>Ubah Password</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
+              <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
               <div class="breadcrumb-item">Ubah Password</div>
             </div>
           </div>
           <div class="section-body">
 
-            <h2 class="section-title">Hai, {{ $adminChangePassword->name }}!</h2>
+            <h2 class="section-title">Hai, {{ $ChangePassword->name }}!</h2>
             <p class="section-lead">
               Ubah password Anda di halaman ini.
             </p>
@@ -28,7 +28,7 @@
             <div class="row mt-sm-4">
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
-                  <form action="{{ route('admin.change-password.update', $adminChangePassword->id) }}" method="POST" class="needs-validation" novalidate="">
+                  <form action="{{ route('user.change-password.update', $ChangePassword->id) }}" method="POST" class="needs-validation" novalidate="">
                     @csrf
                     @method('PUT')
                     <div class="card-header">
@@ -79,7 +79,7 @@
     </div>
 @endsection
 
-@push('admin-addon-script')
+@push('addon-script')
     <script>
         const toggleOldPassword =
               document.querySelector('#toggleOldPassword');

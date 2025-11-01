@@ -19,7 +19,7 @@
         <a href="{{ route('user.profile.index') }}" class="dropdown-item has-icon">
         <i class="fas fa-user"></i> Profil
         </a>
-        <a href="" class="dropdown-item has-icon">
+        <a href="{{ route('user.change-password.index') }}" class="dropdown-item has-icon">
         <i class="fas fa-key"></i> Ubah Password
         </a>
         <div class="dropdown-divider"></div>
