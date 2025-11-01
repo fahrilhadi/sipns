@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('dashboard') }}">Absensi</a>
+            <a href="{{ route('dashboard') }}">SIPNS</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('dashboard') }}">Abs</a>
+            <a href="{{ route('dashboard') }}">SIPNS</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -16,7 +16,7 @@
         <ul class="sidebar-menu">
             <li class="menu-header">User Management</li>
             <li class="nav-item dropdown {{ $type_menu === 'users' ? 'active' : '' }}">
-                <a href="{{ route('users.index') }}"
+                <a href=""
                     class="nav-link"><i class="far fa-user"></i><span>Users</span></a>
             </li>
         </ul>
