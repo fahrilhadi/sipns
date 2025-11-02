@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('alamat')->nullable();
             $table->string('no_hp', 20)->nullable();
             $table->string('npwp', 30)->nullable();
+            $table->string('foto')->nullable();
 
             // Foreign keys
             $table->foreignId('agama_id')->constrained('agamas')->onDelete('restrict');

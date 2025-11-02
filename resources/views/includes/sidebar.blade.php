@@ -10,10 +10,11 @@
         <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
         </li>
-        {{-- <li class="{{ request()->routeIs('admin.users-management.index','admin.users-management.create','admin.users-management.edit','admin.users-management.change-password') ? 'active' : '' }}">
-            <a href="{{ route('admin.users-management.index') }}" class="nav-link"><i class="fas fa-users"></i> <span>Manajemen Pengguna</span></a>
+        <li class="menu-header">Data Pegawai</li>
+        <li class="nav-item dropdown {{ request()->routeIs('user.employee-list.index','user.employee-list.create','user.employee-list.edit') ? 'active' : '' }}">
+            <a href="{{ route('user.employee-list.index') }}" class="nav-link"><i class="fas fa-users"></i> <span>Daftar Pegawai</span></a>
         </li>
-        <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
+        {{-- <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
             <a href="{{ route('admin.teachers-data.index') }}" class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a>
         </li>
         <li class="{{ request()->routeIs('admin.criteria.index','admin.criteria.create','admin.criteria.edit') ? 'active' : '' }}">
