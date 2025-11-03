@@ -31,7 +31,7 @@ class RankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_golongan' => ['required', 'string', 'max:50'],
+            'nama_golongan' => ['required', 'string', 'max:10'],
         ], [
             'nama_golongan.required' => 'Masukkan nama golongan!',
         ]);
@@ -75,7 +75,7 @@ class RankController extends Controller
     {
         // validate form
         $request->validate([
-            'nama_golongan' => ['required', 'string', 'max:50'],
+            'nama_golongan' => ['required', 'string', 'max:10'],
         ],[
             'nama_golongan.required' => 'Masukkan nama golongan!',
         ]);
@@ -103,6 +103,29 @@ class RankController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari golongan berdasarkan ID
+        $golongan = Golongan::findOrFail($id);
+
+        // Cek apakah golongan ini masih dipakai oleh pegawai
+        if ($golongan->pegawai()->count() > 0) {
+            // Jika masih digunakan, tampilkan pesan error
+            $notification = [
+                'message' => 'Tidak dapat menghapus golongan karena masih digunakan oleh data pegawai!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->route('user.ranks.index')->with($notification);
+        }
+
+        // Jika tidak digunakan, hapus
+        $golongan->delete();
+
+        // Toastr notification
+        $notification = [
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user.ranks.index')->with($notification);
     }
 }

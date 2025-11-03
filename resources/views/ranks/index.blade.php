@@ -78,7 +78,7 @@
         
                         Swal.fire({
                             title: 'Apakah anda yakin?',
-                            text: "Hapus data agama?",
+                            text: "Hapus data golongan?",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
