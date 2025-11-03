@@ -247,6 +247,18 @@ class EmployeeDataController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //get pegawai by ID
+        $pegawai = Pegawai::findOrFail($id);
+
+        //delete pegawai
+        $pegawai->delete();
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.employee-list.index')->with($notification);
     }
 }

@@ -127,7 +127,7 @@
     </div>
 @endsection
 
-@push('admin-addon-script')
+@push('addon-script')
     {{-- sweet alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
@@ -141,7 +141,7 @@
         
                         Swal.fire({
                             title: 'Apakah anda yakin?',
-                            text: "Hapus data pengguna?",
+                            text: "Hapus data pegawai?",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
