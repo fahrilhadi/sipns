@@ -61,7 +61,7 @@
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        <img src="{{ asset('/storage/pegawai/foto/' . $pegawai->foto) }}" alt="" width="50">
+                                        <img src="{{ asset('/storage/public/pegawai/foto/' . $pegawai->foto) }}" alt="" width="50">
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ $pegawai->nip }}

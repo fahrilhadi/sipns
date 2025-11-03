@@ -209,7 +209,7 @@
                             </div>
                             <div class="profile-widget col-md-6 col-12">
                                 <div class="profile-widget-header">                    
-                                    <img alt="image" id="showImage" src="{{ !empty($fotoPegawai->foto) ? asset('/storage/pegawai/foto/' . $fotoPegawai->foto) : asset('/assets/img/avatar/avatar-1.png') }}" class="rounded-circle profile-widget-picture">
+                                    <img alt="image" id="showImage" src="{{ !empty($fotoPegawai->foto) ? asset('/storage/public/pegawai/foto/' . $fotoPegawai->foto) : asset('/assets/img/avatar/avatar-1.png') }}" class="rounded-circle profile-widget-picture">
                                 </div>
                             </div>
                         </div>
