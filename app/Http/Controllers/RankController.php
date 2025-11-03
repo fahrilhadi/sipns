@@ -64,7 +64,8 @@ class RankController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $golongan = Golongan::findOrFail($id);
+        return view('ranks.edit', compact('golongan'));
     }
 
     /**
@@ -72,7 +73,29 @@ class RankController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_golongan' => ['required', 'string', 'max:50'],
+        ],[
+            'nama_golongan.required' => 'Masukkan nama golongan!',
+        ]);
+
+        // Temukan golongan berdasarkan ID
+        $golongan = Golongan::findOrFail($id);
+
+        // Data untuk diupdate
+        $golongan->update([
+            'nama_golongan' => $request->nama_golongan,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.ranks.index')->with($notification);
     }
 
     /**
