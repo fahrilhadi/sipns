@@ -103,6 +103,19 @@ class ReligionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //get agama by ID
+        $agama = Agama::findOrFail($id);
+
+        //delete agama
+        $agama->delete();
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        );
+
+        //redirect to index
+        return redirect()->route('user.religions.index')->with($notification);
     }
 }
