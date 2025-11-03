@@ -64,7 +64,8 @@ class ReligionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $agama = Agama::findOrFail($id);
+        return view('religions.edit', compact('agama'));
     }
 
     /**
@@ -72,7 +73,29 @@ class ReligionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_agama' => ['required', 'string', 'max:50'],
+        ],[
+            'nama_agama.required' => 'Masukkan nama agama!',
+        ]);
+
+        // Temukan agama berdasarkan ID
+        $agama = Agama::findOrFail($id);
+
+        // Data untuk diupdate
+        $agama->update([
+            'nama_agama' => $request->nama_agama,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.religions.index')->with($notification);
     }
 
     /**
