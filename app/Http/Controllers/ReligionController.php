@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agama;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class ReligionController extends Controller
 {
@@ -21,7 +22,7 @@ class ReligionController extends Controller
      */
     public function create()
     {
-        //
+        return view('religions.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class ReligionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_agama' => ['required', 'string', 'max:50'],
+        ], [
+            'nama_agama.required' => 'Masukkan nama agama!',
+        ]);
+
+        $agama = Agama::create([
+            'nama_agama' => $request->nama_agama,
+        ]);
+
+        event(new Registered($agama));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.religions.index')->with($notification);
     }
 
     /**
