@@ -11,6 +11,10 @@ class Pegawai extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'tgl_lahir' => 'date',
+    ];
+
     public function agama()
     {
         return $this->belongsTo(Agama::class);

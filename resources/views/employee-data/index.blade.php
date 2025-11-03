@@ -60,8 +60,8 @@
                                     <td class="text-center align-middle">
                                         {{ $loop->iteration }}
                                     </td>
-                                    <td class="text-center align-middle">
-                                        {{ $pegawai->foto }}
+                                    <td>
+                                        <img src="{{ asset('/storage/pegawai/foto/' . $pegawai->foto) }}" alt="" width="50">
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ $pegawai->nip }}
@@ -76,7 +76,7 @@
                                         {{ $pegawai->alamat }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        {{ $pegawai->tgl_lahir }}
+                                        {{ $pegawai->tgl_lahir->format('d/m/Y') }}
                                     </td>
                                     <td class="text-center align-middle">
                                         {{ $pegawai->jenis_kelamin }}
