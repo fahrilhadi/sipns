@@ -14,6 +14,10 @@
         <li class="nav-item dropdown {{ request()->routeIs('user.employee-list.index','user.employee-list.create','user.employee-list.edit') ? 'active' : '' }}">
             <a href="{{ route('user.employee-list.index') }}" class="nav-link"><i class="fas fa-users"></i> <span>Daftar Pegawai</span></a>
         </li>
+        <li class="menu-header">Master Data</li>
+        <li class="nav-item dropdown {{ request()->routeIs('user.religions.index','user.religions.create','user.religions.edit') ? 'active' : '' }}">
+            <a href="{{ route('user.religions.index') }}" class="nav-link"><i class="fas fa-mosque"></i> <span>Agama</span></a>
+        </li>
         {{-- <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
             <a href="{{ route('admin.teachers-data.index') }}" class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a>
         </li>
