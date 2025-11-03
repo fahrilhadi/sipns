@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Golongan;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RankController extends Controller
 {
@@ -21,7 +22,7 @@ class RankController extends Controller
      */
     public function create()
     {
-        //
+        return view('ranks.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class RankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_golongan' => ['required', 'string', 'max:50'],
+        ], [
+            'nama_golongan.required' => 'Masukkan nama golongan!',
+        ]);
+
+        $golongan = Golongan::create([
+            'nama_golongan' => $request->nama_golongan,
+        ]);
+
+        event(new Registered($golongan));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.ranks.index')->with($notification);
     }
 
     /**
