@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\DashboardController;
@@ -17,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/change-password', ChangePasswordController::class, ['as' => 'user']);
     Route::resource('/employee-list', EmployeeDataController::class, ['as' => 'user']);
     Route::resource('/religions', ReligionController::class, ['as' => 'user']);
+    Route::resource('/ranks', RankController::class, ['as' => 'user']);
 });
 
 require __DIR__.'/auth.php';

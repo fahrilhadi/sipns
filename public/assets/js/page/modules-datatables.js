@@ -33,7 +33,14 @@ $("#table-employees").dataTable({
     { "sortable": false, "targets": [2,3] }
   ]
 });
+
 $("#table-religions").dataTable({
+  "columnDefs": [
+    { "sortable": false, "targets": [1] }
+  ]
+});
+
+$("#table-ranks").dataTable({
   "columnDefs": [
     { "sortable": false, "targets": [1] }
   ]
