@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TempatTugas;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class DutyStationController extends Controller
 {
@@ -21,7 +22,7 @@ class DutyStationController extends Controller
      */
     public function create()
     {
-        //
+        return view('duty-station.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class DutyStationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_tempat' => ['required', 'string', 'max:100'],
+        ], [
+            'nama_tempat.required' => 'Masukkan nama tempat tugas!',
+        ]);
+
+        $tempatTugas = TempatTugas::create([
+            'nama_tempat' => $request->nama_tempat,
+        ]);
+
+        event(new Registered($tempatTugas));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.duty-station.index')->with($notification);
     }
 
     /**
