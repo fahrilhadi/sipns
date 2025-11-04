@@ -64,7 +64,8 @@ class PositionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        return view('positions.edit', compact('jabatan'));
     }
 
     /**
@@ -72,7 +73,29 @@ class PositionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_jabatan' => ['required', 'string', 'max:100'],
+        ],[
+            'nama_jabatan.required' => 'Masukkan nama jabatan!',
+        ]);
+
+        // Temukan jabatan berdasarkan ID
+        $jabatan = Jabatan::findOrFail($id);
+
+        // Data untuk diupdate
+        $jabatan->update([
+            'nama_jabatan' => $request->nama_jabatan,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.positions.index')->with($notification);
     }
 
     /**
