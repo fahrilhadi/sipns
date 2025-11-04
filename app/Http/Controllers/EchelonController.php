@@ -64,7 +64,8 @@ class EchelonController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $eselon = Eselon::findOrFail($id);
+        return view('echelons.edit', compact('eselon'));
     }
 
     /**
@@ -72,7 +73,29 @@ class EchelonController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_eselon' => ['required', 'string', 'max:10'],
+        ],[
+            'nama_eselon.required' => 'Masukkan nama eselon!',
+        ]);
+
+        // Temukan eselon berdasarkan ID
+        $eselon = Eselon::findOrFail($id);
+
+        // Data untuk diupdate
+        $eselon->update([
+            'nama_eselon' => $request->nama_eselon,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.echelons.index')->with($notification);
     }
 
     /**
