@@ -103,6 +103,29 @@ class WorkUnitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari unit kerja berdasarkan ID
+        $unitkerja = UnitKerja::findOrFail($id);
+
+        // Cek apakah unit kerja ini masih dipakai oleh pegawai
+        if ($unitkerja->pegawai()->count() > 0) {
+            // Jika masih digunakan, tampilkan pesan error
+            $notification = [
+                'message' => 'Tidak dapat menghapus unit kerja karena masih digunakan oleh data pegawai!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->route('user.work-unit.index')->with($notification);
+        }
+
+        // Jika tidak digunakan, hapus
+        $unitkerja->delete();
+
+        // Toastr notification
+        $notification = [
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user.work-unit.index')->with($notification);
     }
 }
