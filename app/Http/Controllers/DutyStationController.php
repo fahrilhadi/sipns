@@ -77,7 +77,7 @@ class DutyStationController extends Controller
         $request->validate([
             'nama_tempat' => ['required', 'string', 'max:100'],
         ],[
-            'nama_tempat.required' => 'Masukkan nama unit kerja!',
+            'nama_tempat.required' => 'Masukkan nama tempat tugas!',
         ]);
 
         // Temukan tempat tugas berdasarkan ID
@@ -103,6 +103,29 @@ class DutyStationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari tempat tugas berdasarkan ID
+        $tempatTugas = TempatTugas::findOrFail($id);
+
+        // Cek apakah tempat tugas ini masih dipakai oleh pegawai
+        if ($tempatTugas->pegawai()->count() > 0) {
+            // Jika masih digunakan, tampilkan pesan error
+            $notification = [
+                'message' => 'Tidak dapat menghapus tempat tugas karena masih digunakan oleh data pegawai!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->route('user.duty-station.index')->with($notification);
+        }
+
+        // Jika tidak digunakan, hapus
+        $tempatTugas->delete();
+
+        // Toastr notification
+        $notification = [
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user.duty-station.index')->with($notification);
     }
 }
