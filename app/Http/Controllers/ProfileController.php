@@ -72,10 +72,10 @@ class ProfileController extends Controller
 
             // upload new photo
             $photo = $request->file('photo');
-            $photo->storeAs('public/profile', $photo->hashName());
+            $photo->storeAs('profile', $photo->hashName());
 
             // delete old photo
-            Storage::delete('public/profile/'.$Profile->photo);
+            Storage::delete('profile/'.$Profile->photo);
 
             // update guru profile with new photo
             $Profile->update([

@@ -66,7 +66,7 @@
                             </div>
                             <div class="profile-widget col-md-6 col-12">
                                 <div class="profile-widget-header">                    
-                                    <img alt="image" id="showImage" src="{{ !empty($Profile->photo) ? asset('/storage/public/profile/' . $Profile->photo) : asset('/assets/img/avatar/avatar-1.png') }}" class="rounded-circle profile-widget-picture">
+                                    <img alt="image" id="showImage" src="{{ !empty($Profile->photo) ? asset('/storage/profile/' . $Profile->photo) : asset('/assets/img/avatar/avatar-1.png') }}" class="rounded-circle profile-widget-picture">
                                 </div>
                             </div>
                         </div>

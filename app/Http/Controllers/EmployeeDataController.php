@@ -7,6 +7,7 @@ use App\Models\Eselon;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use App\Models\Golongan;
+use PDF;
 use App\Models\UnitKerja;
 use App\Models\TempatTugas;
 use Illuminate\Http\Request;
@@ -18,10 +19,22 @@ class EmployeeDataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pegawais = Pegawai::latest()->get();
-        return view('employee-data.index', compact('pegawais'));
+        // Ambil semua unit kerja untuk dropdown filter
+        $unitKerjas = UnitKerja::all();
+
+        // Ambil unit kerja yang dipilih (kalau ada)
+        $unitKerjaId = $request->input('unit_kerja_id');
+
+        // Query pegawai
+        $pegawais = Pegawai::with(['agama', 'golongan', 'eselon', 'jabatan', 'unitKerja', 'tempatTugas'])
+            ->when($unitKerjaId, function ($query, $unitKerjaId) {
+                return $query->where('unit_kerja_id', $unitKerjaId);
+            })
+            ->get();
+
+        return view('employee-data.index', compact('pegawais', 'unitKerjas', 'unitKerjaId'));
     }
 
     /**
@@ -82,7 +95,7 @@ class EmployeeDataController extends Controller
         $fotoPegawai = null;
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            $foto->storeAs('public/pegawai/foto', $foto->hashName());
+            $foto->storeAs('pegawai/foto', $foto->hashName());
             $fotoPegawai = $foto->hashName();
         }
 
@@ -188,10 +201,10 @@ class EmployeeDataController extends Controller
 
             // upload new photo
             $foto = $request->file('foto');
-            $foto->storeAs('public/pegawai/foto', $foto->hashName());
+            $foto->storeAs('pegawai/foto', $foto->hashName());
 
             // delete old photo
-            Storage::delete('public/pegawai/foto/'.$pegawai->foto);
+            Storage::delete('pegawai/foto/'.$pegawai->foto);
 
             // update employee data with new photo
             $pegawai->update([
