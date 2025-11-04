@@ -19,7 +19,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <a href="{{ route('user.ranks.create') }}" class="btn btn-primary btn-icon icon-left"><i class="fas fa-plus"></i> Tambah Data</a>
+                    <a href="{{ route('user.echelons.create') }}" class="btn btn-primary btn-icon icon-left"><i class="fas fa-plus"></i> Tambah Data</a>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -43,8 +43,8 @@
                                         {{ $eselon->nama_eselon }}
                                     </td>
                                     <td class="text-center align-middle">
-                                        <form action="{{ route('user.ranks.destroy', $eselon->id) }}" method="POST">
-                                            <a href="{{ route('user.ranks.edit', $eselon->id) }}" class="btn btn-sm btn-warning btn-icon mt-1 mb-1"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('user.echelons.destroy', $eselon->id) }}" method="POST">
+                                            <a href="{{ route('user.echelons.edit', $eselon->id) }}" class="btn btn-sm btn-warning btn-icon mt-1 mb-1"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" id="delete" class="btn btn-sm btn-danger btn-icon"><i class="fas fa-trash"></i></button>

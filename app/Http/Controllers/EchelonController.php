@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eselon;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class EchelonController extends Controller
 {
@@ -21,7 +22,7 @@ class EchelonController extends Controller
      */
     public function create()
     {
-        //
+        return view('echelons.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class EchelonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_eselon' => ['required', 'string', 'max:10'],
+        ], [
+            'nama_eselon.required' => 'Masukkan nama eselon!',
+        ]);
+
+        $eselon = Eselon::create([
+            'nama_eselon' => $request->nama_eselon,
+        ]);
+
+        event(new Registered($eselon));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.echelons.index')->with($notification);
     }
 
     /**
