@@ -8,6 +8,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\WorkUnitController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DutyStationController;
 use App\Http\Controllers\EmployeeDataController;
 use App\Http\Controllers\ChangePasswordController;
 
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/echelons', EchelonController::class, ['as' => 'user']);
     Route::resource('/positions', PositionController::class, ['as' => 'user']);
     Route::resource('/work-unit', WorkUnitController::class, ['as' => 'user']);
+    Route::resource('/duty-station', DutyStationController::class, ['as' => 'user']);
 });
 
 require __DIR__.'/auth.php';

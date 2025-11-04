@@ -30,6 +30,9 @@
         <li class="nav-item dropdown {{ request()->routeIs('user.work-unit.index','user.work-unit.create','user.work-unit.edit') ? 'active' : '' }}">
             <a href="{{ route('user.work-unit.index') }}" class="nav-link"><i class="fas fa-circle"></i> <span>Unit Kerja</span></a>
         </li>
+        <li class="nav-item dropdown {{ request()->routeIs('user.duty-station.index','user.duty-station.create','user.duty-station.edit') ? 'active' : '' }}">
+            <a href="{{ route('user.duty-station.index') }}" class="nav-link"><i class="fas fa-circle"></i> <span>Tempat Tugas</span></a>
+        </li>
         {{-- <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
             <a href="{{ route('admin.teachers-data.index') }}" class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a>
         </li>
