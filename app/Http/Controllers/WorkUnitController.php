@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UnitKerja;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class WorkUnitController extends Controller
 {
@@ -21,7 +22,7 @@ class WorkUnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('work-unit.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class WorkUnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_unit' => ['required', 'string', 'max:100'],
+        ], [
+            'nama_unit.required' => 'Masukkan nama unit kerja!',
+        ]);
+
+        $unitkerjas = UnitKerja::create([
+            'nama_unit' => $request->nama_unit,
+        ]);
+
+        event(new Registered($unitkerjas));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.work-unit.index')->with($notification);
     }
 
     /**
