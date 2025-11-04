@@ -103,6 +103,29 @@ class PositionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari jabatan berdasarkan ID
+        $jabatan = Jabatan::findOrFail($id);
+
+        // Cek apakah jabatan ini masih dipakai oleh pegawai
+        if ($jabatan->pegawai()->count() > 0) {
+            // Jika masih digunakan, tampilkan pesan error
+            $notification = [
+                'message' => 'Tidak dapat menghapus jabatan karena masih digunakan oleh data pegawai!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->route('user.positions.index')->with($notification);
+        }
+
+        // Jika tidak digunakan, hapus
+        $jabatan->delete();
+
+        // Toastr notification
+        $notification = [
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user.positions.index')->with($notification);
     }
 }
