@@ -24,6 +24,9 @@
         <li class="nav-item dropdown {{ request()->routeIs('user.echelons.index','user.echelons.create','user.echelons.edit') ? 'active' : '' }}">
             <a href="{{ route('user.echelons.index') }}" class="nav-link"><i class="fas fa-circle"></i> <span>Eselon</span></a>
         </li>
+        <li class="nav-item dropdown {{ request()->routeIs('user.positions.index','user.positions.create','user.positions.edit') ? 'active' : '' }}">
+            <a href="{{ route('user.positions.index') }}" class="nav-link"><i class="fas fa-circle"></i> <span>Jabatan</span></a>
+        </li>
         {{-- <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
             <a href="{{ route('admin.teachers-data.index') }}" class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a>
         </li>
