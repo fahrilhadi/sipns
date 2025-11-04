@@ -33,17 +33,5 @@
         <li class="nav-item dropdown {{ request()->routeIs('user.duty-station.index','user.duty-station.create','user.duty-station.edit') ? 'active' : '' }}">
             <a href="{{ route('user.duty-station.index') }}" class="nav-link"><i class="fas fa-circle"></i> <span>Tempat Tugas</span></a>
         </li>
-        {{-- <li class="{{ request()->routeIs('admin.teachers-data.index','admin.teachers-data.create','admin.teachers-data.edit','admin.teachers-data.change-password') ? 'active' : '' }}">
-            <a href="{{ route('admin.teachers-data.index') }}" class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a>
-        </li>
-        <li class="{{ request()->routeIs('admin.criteria.index','admin.criteria.create','admin.criteria.edit') ? 'active' : '' }}">
-            <a href="{{ route('admin.criteria.index') }}" class="nav-link"><i class="fas fa-tasks"></i> <span>Kriteria</span></a>
-        </li>
-        <li class="{{ request()->routeIs('admin.supervision-instruments.index','admin.supervision-instruments.create','admin.supervision-instruments.edit') ? 'active' : '' }}">
-            <a href="{{ route('admin.supervision-instruments.index') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Instrumen Supervisi</span></a>
-        </li>
-        <li class="{{ request()->routeIs('admin.assessments.index','admin.assessments.show') ? 'active' : '' }}">
-            <a href="{{ route('admin.assessments.index') }}" class="nav-link"><i class="fas fa-pen"></i> <span>Penilaian</span></a>
-        </li>  --}}
     </aside>
 </div>
