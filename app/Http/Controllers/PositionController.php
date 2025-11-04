@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class PositionController extends Controller
 {
@@ -21,7 +22,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('positions.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_jabatan' => ['required', 'string', 'max:100'],
+        ], [
+            'nama_jabatan.required' => 'Masukkan nama jabatan!',
+        ]);
+
+        $jabatan = Jabatan::create([
+            'nama_jabatan' => $request->nama_jabatan,
+        ]);
+
+        event(new Registered($jabatan));
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil ditambahkan!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('user.positions.index')->with($notification);
     }
 
     /**
