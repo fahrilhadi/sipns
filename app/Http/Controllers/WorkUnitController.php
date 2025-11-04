@@ -64,7 +64,8 @@ class WorkUnitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $unitkerja = UnitKerja::findOrFail($id);
+        return view('work-unit.edit', compact('unitkerja'));
     }
 
     /**
@@ -72,7 +73,29 @@ class WorkUnitController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_unit' => ['required', 'string', 'max:100'],
+        ],[
+            'nama_unit.required' => 'Masukkan nama unit kerja!',
+        ]);
+
+        // Temukan unit kerja berdasarkan ID
+        $unitkerja = UnitKerja::findOrFail($id);
+
+        // Data untuk diupdate
+        $unitkerja->update([
+            'nama_unit' => $request->nama_unit,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.work-unit.index')->with($notification);
     }
 
     /**
