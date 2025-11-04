@@ -103,6 +103,29 @@ class EchelonController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Cari eselon berdasarkan ID
+        $eselon = Eselon::findOrFail($id);
+
+        // Cek apakah eselon ini masih dipakai oleh pegawai
+        if ($eselon->pegawai()->count() > 0) {
+            // Jika masih digunakan, tampilkan pesan error
+            $notification = [
+                'message' => 'Tidak dapat menghapus eselon karena masih digunakan oleh data pegawai!',
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->route('user.echelons.index')->with($notification);
+        }
+
+        // Jika tidak digunakan, hapus
+        $eselon->delete();
+
+        // Toastr notification
+        $notification = [
+            'message' => 'Data berhasil dihapus!',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('user.echelons.index')->with($notification);
     }
 }
