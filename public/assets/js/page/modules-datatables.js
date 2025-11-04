@@ -28,19 +28,13 @@ $("[data-checkboxes]").each(function() {
   });
 });
 
-$("#table-employees").dataTable({
+$("#table-1").dataTable({
   "columnDefs": [
     { "sortable": false, "targets": [2,3] }
   ]
 });
 
-$("#table-religions").dataTable({
-  "columnDefs": [
-    { "sortable": false, "targets": [1] }
-  ]
-});
-
-$("#table-ranks").dataTable({
+$("#table-2").dataTable({
   "columnDefs": [
     { "sortable": false, "targets": [1] }
   ]
