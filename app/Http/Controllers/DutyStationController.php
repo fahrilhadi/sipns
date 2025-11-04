@@ -64,7 +64,8 @@ class DutyStationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tempatTugas = TempatTugas::findOrFail($id);
+        return view('duty-station.edit', compact('tempatTugas'));
     }
 
     /**
@@ -72,7 +73,29 @@ class DutyStationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate form
+        $request->validate([
+            'nama_tempat' => ['required', 'string', 'max:100'],
+        ],[
+            'nama_tempat.required' => 'Masukkan nama unit kerja!',
+        ]);
+
+        // Temukan tempat tugas berdasarkan ID
+        $tempatTugas = TempatTugas::findOrFail($id);
+
+        // Data untuk diupdate
+        $tempatTugas->update([
+            'nama_tempat' => $request->nama_tempat,
+        ]);
+
+        // toastr notification
+        $notification = array (
+            'message' => 'Data berhasil diubah!',
+            'alert-type' => 'success'
+        );
+
+        // redirect back
+        return redirect()->route('user.duty-station.index')->with($notification);
     }
 
     /**
